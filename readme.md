@@ -13,7 +13,7 @@ This command will install all the necessary packages for the program to run.
 ## Step 2: Run the Program
 Once all the dependencies are installed, navigate to the directory where `note_generator.py` is located and run the following command:
 ```
-python note_generator.py
+python3 note_generator.py
 ```
 
 This command will execute the `note_generator.py` script and generate notes.

@@ -126,9 +126,7 @@ def verify_signature(event_id: str, pubkey: str, sig: str) -> bool:
         return False
 
 
-def send_event(public_key, private_key_hex):
-    ws = websocket.create_connection(ws_relay)
-    print("WebSocket connection created.")
+def send_event(ws, public_key, private_key_hex):
 
     for i in range(2):
         # Create a new event
@@ -145,19 +143,20 @@ def send_event(public_key, private_key_hex):
 
             # Send the event over the WebSocket connection
             ws.send(event_json)
-            print("Event sent:", event_json)
+            print_color(f"Event sent:\033[0m{event_json}\033[0m", 31)
         else:
-            print("Invalid signature, event not sent.")
-
-    # Close the WebSocket connection
-    ws.close()
-    print("WebSocket connection closed.")
+            print_color("Invalid signature, event not sent.", 31)
 
 
 while True:
     for relay in relays:
-        ws_relay = relay
-        send_event(public_key1, private_key_hex1)  # Use the first keypair
-        send_event(public_key2, private_key_hex2)  # Use the second keypair
+        try:
+            ws_relay = websocket.create_connection(relay)
+            send_event(ws_relay, public_key1, private_key_hex1)  # Use the first keypair
+            send_event(ws_relay, public_key2, private_key_hex2)  # Use the second keypair
+            ws_relay.close()
+        except Exception as e:
+            print(f"Error connecting to {relay}: {e}")
+            continue
 
     time.sleep(10)
