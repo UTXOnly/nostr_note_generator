@@ -3,4 +3,4 @@ hashlib
 json
 random
 time
-websocket
+websockets
