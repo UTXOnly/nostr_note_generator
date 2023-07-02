@@ -13,9 +13,9 @@ This command will install all the necessary packages for the program to run.
 ## Step 2: Run the Program
 Once all the dependencies are installed, navigate to the directory where `note_generator.py` is located and run the following command:
 ```
-python3 note_generator.py
+python3 post_and_query.py
 ```
 
-This command will execute the `note_generator.py` script and generate notes.
+This command will execute the `post_and_query.py` script and generate notes, then query the relay for notes from one of those pub keys.
 
-That's it! You have successfully run `note_generator.py`.
+That's it! You have successfully run posted and queried for some notes
